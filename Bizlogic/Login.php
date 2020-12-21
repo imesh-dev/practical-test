@@ -4,12 +4,12 @@
 	
 	$_POST = json_decode(file_get_contents("php://input"), true);
 	
-	$id =$_POST['email'];
-	$name =$_POST['password'];
+	$email =$_POST['email'];
+	$password =$_POST['password'];
 	
 	$result = '';
 	
-	$sql = $conn->query("Select username from user where email = '$email'");
+	$sql = $conn->query("Select username from user where email = '$email' and password ='$password'");
 	
 	
 	$result = mysqli_query($conn,$sql);
@@ -20,8 +20,7 @@
       
 		
       if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
+         $_SESSION['login_user'] = $email;
 		 $result = "Success";
          
       }else {
